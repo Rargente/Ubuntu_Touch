@@ -25,6 +25,16 @@ case "$DEVICE" in
 	    "$@"
         ;;
 
+ "nobleltetmo")    
+        sed -i \
+            -e 's block/platform/15570000.ufs/by-name/SYSTEM sda16 ' \
+            -e 's block/platform/15570000.ufs/by-name/USERDATA sda19 ' \
+            -e 's block/platform/15570000.ufs/by-name/CACHE sda17 ' \
+            -e 's block/platform/15570000.ufs/by-name/PERSISTENT sda13 ' \
+            -e 's block/platform/15570000.ufs/by-name/EFS sda3 ' \
+            "$@"
+        ;;
+
     "suzu" | "kugo" | "blanc")
          sed -i \
              -e 's block/bootdevice/by-name/cache mmcblk0p24 ' \
