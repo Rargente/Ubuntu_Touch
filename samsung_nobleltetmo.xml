@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+<!-- External Repo's -->
+<remote name="twg"
+	fetch="https://github.com/TheWiggles"
+	revision="refs/heads/cm-14.1" />
+
+<remote name="u74"
+	fetch="https://github.com/universal7420"
+	revision="refs/heads/cm-14.1" />
+
+<!-- Samsung Device Repos -->
+
+        <project path="device/samsung/nobleltetmo"
+			 name="android_device_samsung_nobleltetmo"
+			 remote="los"/>
+        <project path="device/samsung/noblelte-common"
+			 name="android_device_samsung_noblelte-common"
+			 remote="los"/>
+
+<!-- Samsung Noblelte Kernel -->
+	<project path="kernel/samsung/noblelte"
+			 name="android_kernel_samsung_noblelte"
+			 remote="los"/>
+
+<!-- Samsung Hardware Dependencies-->
+	<project path="hardware/samsung_slsi-cm/openmax"
+			 name="android_hardware_samsung_slsi-cm_openmax"
+			 remote="los"/>
+	<project path="hardware/samsung_slsi-cm/exynos7420"
+			 name="android_hardware_samsung_slsi-cm_exynos7420"
+			 remote="los"/>
+	<project path="hardware/samsung_slsi-cm/exynos5"
+			 name="android_hardware_samsung_slsi-cm_exynos5"
+			 remote="los"/>
+	<project path="hardware/samsung_slsi-cm/exynos"
+			 name="android_hardware_samsung_slsi-cm_exynos"
+			 remote="los"/>
+	<project path="hardware/samsung"
+			 name="android_hardware_samsung"
+			 remote="los"/>
+
+<!-- Samsung Vendor Specifics -->
+	<project path="vendor/samsung/noblelte-common"
+			 name="proprietary_vendor_samsung_noblelte-common"
+			 remote="twg"/>
+	<project path="vendor/samsung/nobleltetmo"
+			 name="proprietary_vendor_samsung_nobleltetmo"
+			 remote="u74" revision="lineage-16.0"/>
+</manifest>
