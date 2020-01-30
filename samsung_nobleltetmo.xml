@@ -2,6 +2,10 @@
 <manifest>
 
 <!-- External Repo's -->
+<remote name="tyg"
+	fetch="https://github.com/tyg3rpro"
+	revision="refs/heads/cm-14.1" />
+	
 <remote name="twg"
 	fetch="https://github.com/TheWiggles"
 	revision="refs/heads/cm-14.1" />
@@ -14,32 +18,32 @@
 
         <project path="device/samsung/nobleltetmo"
 			 name="android_device_samsung_nobleltetmo"
-			 remote="los"/>
+			 remote="tyg"/>
         <project path="device/samsung/noblelte-common"
 			 name="android_device_samsung_noblelte-common"
-			 remote="los"/>
+			 remote="tyg"/>
 
 <!-- Samsung Noblelte Kernel -->
 	<project path="kernel/samsung/noblelte"
 			 name="android_kernel_samsung_noblelte"
-			 remote="los"/>
+			 remote="tyg"/>
 
 <!-- Samsung Hardware Dependencies-->
 	<project path="hardware/samsung_slsi-cm/openmax"
 			 name="android_hardware_samsung_slsi-cm_openmax"
-			 remote="los"/>
+			 remote="tyg"/>
 	<project path="hardware/samsung_slsi-cm/exynos7420"
 			 name="android_hardware_samsung_slsi-cm_exynos7420"
-			 remote="los"/>
+			 remote="tyg"/>
 	<project path="hardware/samsung_slsi-cm/exynos5"
 			 name="android_hardware_samsung_slsi-cm_exynos5"
-			 remote="los"/>
+			 remote="tyg"/>
 	<project path="hardware/samsung_slsi-cm/exynos"
 			 name="android_hardware_samsung_slsi-cm_exynos"
-			 remote="los"/>
+			 remote="tyg"/>
 	<project path="hardware/samsung"
 			 name="android_hardware_samsung"
-			 remote="los"/>
+			 remote="tyg"/>
 
 <!-- Samsung Vendor Specifics -->
 	<project path="vendor/samsung/noblelte-common"
