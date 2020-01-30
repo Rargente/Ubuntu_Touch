@@ -18,15 +18,15 @@
 
         <project path="device/samsung/nobleltetmo"
 			 name="android_device_samsung_nobleltetmo"
-			 remote="tyg"/>
+			 remote="tyg" revision="halium-7.1"/>
         <project path="device/samsung/noblelte-common"
 			 name="android_device_samsung_noblelte-common"
-			 remote="tyg"/>
+			 remote="tyg" revision="halium-7.1"/>
 
 <!-- Samsung Noblelte Kernel -->
 	<project path="kernel/samsung/noblelte"
 			 name="android_kernel_samsung_noblelte"
-			 remote="tyg"/>
+			 remote="tyg" revision="halium-7.1"/>
 
 <!-- Samsung Hardware Dependencies-->
 	<project path="hardware/samsung_slsi-cm/openmax"
