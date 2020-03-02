@@ -12,8 +12,8 @@
 <project path="device/samsung/trlte" name="android_device_samsung_trlte" remote="tyg" revision="cm-14.1" />
 <project path="device/samsung/trlte-common" name="android_device_samsung_trlte-common" remote="tyg" revision="halium-7.1" />
 <project path="device/samsung/apq8084-common" name="android_device_samsung_apq8084-common" remote="tyg" revision="cm-14.1" />
-<project path="device/samsung/qcom-common" name="android_device_samsung_qcom-common" remote="tyg" revision="cm-14.1" />
-<project path="hardware/samsung" name="android_hardware_samsung" remote="tyg" revision="cm-14.1" />
+<project path="device/samsung/qcom-common" name="android_device_samsung_qcom-common" remote="tyg" revision="halium-7.1" />
+<project path="hardware/samsung" name="android_hardware_samsung" remote="tyg" revision="halium-7.1" />
 <project path="kernel/samsung/trlte" name="android_kernel_samsung_trlte" remote="tyg" revision="halium-7.1" />
 <project path="vendor/samsung" name="proprietary_vendor_samsung" remote="tyg" revision="halium-7.1" />
 </manifest>
