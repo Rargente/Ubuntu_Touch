@@ -1,0 +1,58 @@
+There comes a point when your device is ready for the ubports installer.
+There a few basic things to address first to make sure your port can install Ubuntu Touch.
+
+The first thing is to ensure you have a working recovery in your source code, here is a snippet from my manifest:
+
+<!-- Remotes for Recovery to Work -->
+<remote name="beidl" fetch="https://github.com/fredldotme" />
+<remote name="omni" fetch="https://github.com/omnirom" />
+<remote name="ubp" fetch="https://github.com/ubports" />
+<!-- Recovery Repos -->
+<remove-project path="bootable/recovery" name="android_bootable_recovery" />
+<remove-project path="external/toybox" name="android_external_toybox" />
+<remove-project path="system/core" name="Halium/android_system_core" />
+<remove-project path="vendor/cm" name="Halium/android_vendor_cm" />
+<project path="bootable/recovery" name="android_bootable_recovery" remote="tyg" revision="halium-7.1" />
+<project path="external/gpg" name="android_external_gpg" revision="halium-7.1" remote="beidl" />
+<project path="external/toybox" name="android_external_toybox" revision="halium-7.1" remote="beidl" />
+<project path="system/core" name="Halium/android_system_core" groups="pdk" remote="hal" revision="halium-7.1-adbroot" />
+<project path="vendor/cm" name="android_vendor_cm" remote="tyg" revision="halium-7.1" />
+
+after adding these to your manifest and syncing your repo, you will want to build again and test,
+when you run 'mka systemimage' recovery.img is automatically generated, you can flash that (or fastboot boot it) to test it.
+things you want to check on first boot
+
+1) Does anything appear on the screen of the device?
+2) when you run adb devices do you get recovery or something else as an output?
+3) if you adb shell to your device and ls /data and /system do you get the expected output
+   [data containing at least the 'rootfs.img' and 'system.img']
+   [system containing at least 'lost+found']
+
+if you answered yes to all 3 of these questions, then congratulations, you have a good start for your recovery.
+
+now if you answered no to any of the above questions, theres a couple basic things to check depending on what your experiencing, 
+  if you answered no to question 1, then you may have to modify your fstab, if you do this and UT stops working, then you can change the recovery fstab in your BoardConfig.mk
+  if you answered no (or something else) to question 2, then you will want to check that you included 'system/core' from the Halium repo, as well as grep for 'ro.adb.secure=1' in your build source
+  if you answered no to question 3, then this issue could be more tricky, you would want to start by reading any logs you can get in your recovery, these are usually going to be found in either /tmp or /cache.
+  based on what the logs are saying you will have an idea of what to look for, in some cases could just be a corrupted partition in which a format via twrp or your preferred method to wipe the device could fix it, and in other cases it could be something more involved like a partial brick from misconfiguring something, the logs will be your guide.
+  
+so once we have the recovery booting and able to access our files, its time to move on to the next step.
+in order to say your recovery is fully working (up to this point, we can only say it can access files) you have to test its ability to function as more than a fancy file browser.
+This is going to be a rather long and lengthy process as there is a lot to do, first and foremost, you have to add 'systempart=/dev/disk/by-partlabel/system datapart=/dev/disk/by-partlabel/userdata' to your kernel cmdline (modify it for your device if needed) then compile.
+from there you will need to do a fresh halium-install using the ubports recovery and it should finish 100% both files, if it doesnt refer to the logs and go from there.
+once you get both files copying 100% you then have to do some manual post install steps, those are:
+
+  mount -o loop /data/rootfs.img /tmp
+  cp -a /tmp/* /system/
+  mv /data/system.img  /system/var/lib/lxc/android/
+  umount /tmp
+  rm /data/rootfs.img
+
+if you get through all these steps with no errors or hangups, then its time to flash your new halium-boot and reboot to test everything.
+
+if you get a spinner and setup GUI then congratulations, your 99% done, if not then you need to go back through and double check everything, if everything looks right as explained here, and its still failing then seek help on telegram in the ubports_porting group.
+
+so you now have the GUI, the recovery, and you prob feel ready to ping the appropriate person (as of this typing, that person is Dalton) to get the next steps to get on the installer, but before you do, the last thing to check is your /cache partition size.
+this can be checked with 'df -h' in recovery, ideally you should have a /cache around 500MB or more, if you have one that is less, you may need to remove /cache from your fstab and create a script that bind mounts a /cache partition (you can see how that would be done here: [https://github.com/fredldotme/device-sony-common/blob/5d64858c3b4fe546200dca481cfcee034f7afda3/rootdir/init.recovery.common.rc#L1-L5])
+
+if you made it this far while following along, Congratulations, your ready to ping and see what is next on your journey to the UBports Installer.
